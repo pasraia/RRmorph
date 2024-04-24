@@ -4,8 +4,8 @@ Title: 3D Morphological Analyses with RRphylo
 Date: 2024-04-24
 Version: 0.0.0
 Author: Marina Melchionna, Silvia Castiglione, Carmela Serio, Giorgia Girardi, Alessandro Mondanaro, Pasquale Raia
-Maintainer: Pasquale Raia <pasquale.raia@unina.it>
-Description: This package, combined with RRphylo, provides a powerful tool to analyse and visualise 3d models in a phylogenetically explicit context. 
+Maintainer: Silvia Castiglione <silvia.castiglione@unina.it>
+Description: Combined with RRphylo, this package provides a powerful tool to analyse and visualise 3d models (surfaces and meshes) in a phylogenetically explicit context. 
 License: GPL-2
 Encoding: UTF-8
 LazyData: true
