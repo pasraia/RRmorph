@@ -2,7 +2,7 @@
 #' @description The function colors a \code{mesh} according to a vector of
 #'   continuous \code{values} related to individual vertices.
 #' @usage col2mesh(mesh,values,pal,from=NULL,to=NULL,NAcol="gray90")
-#' @param mesh a \code{mesh3d} object
+#' @param mesh a \code{mesh3d} object.
 #' @param values a vector of continuous values associated to individual vertices
 #'   of the \code{mesh}.
 #' @param pal a vector of colors to be passed to

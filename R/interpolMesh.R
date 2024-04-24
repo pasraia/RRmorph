@@ -1,24 +1,29 @@
 #' @title Interpolate values on a 3d mesh
-#' @description The function takes a reconstructed \code{mesh3d} object (\code{sur})
-#'   with some related \code{values} (to either triangles or vertices of the mesh)
-#'   and transfers such values to the real mesh (\code{refsur}) from which \code{sur}
-#'   was derived.
-#' @usage interpolMesh(sur,values,refsur,refmat,element=c("triangles","vertices"),k=4)
-#' @param sur a reconstructed \code{mesh3d} object with vertices matching to \code{refmat}.
+#' @description The function takes a reconstructed \code{mesh3d} object
+#'   (\code{sur}) with some related \code{values} (to either triangles or
+#'   vertices of the mesh) and transfers such values to the real mesh
+#'   (\code{refsur}) from which \code{sur} was derived.
+#' @usage
+#' interpolMesh(sur,values,refsur,refmat,element=c("triangles","vertices"),k=4)
+#' @param sur a reconstructed \code{mesh3d} object with vertices matching to
+#'   \code{refmat}.
 #' @param values the vector of values related to \code{sur} to be interpolated.
-#'   \code{values} can be related to either triangles or vertices (see \code{element}).
+#'   \code{values} can be related to either triangles or vertices (see
+#'   \code{element}).
 #' @param refsur the reference mesh (\code{mesh3d} object) to interpolate the
 #'   \code{values} on.
 #' @param refmat the landmark set related to \code{refsur}.
 #' @param element one of \code{"triangles"} or \code{"vertices"}, depending on
-#'   which of them values is related to.
-#' @param k the number of nearest neighbor vertices used for interpolation (see details).
+#'   which of them \code{values} is related to.
+#' @param k the number of nearest neighbor vertices used for interpolation (see
+#'   details).
 #' @return The vector of values related to each vertex of \code{refsur}.
-#' @details The function starts by locating a set of points (NNps) on \code{refsur},
-#'    each being the single nearest neighbor for each vertex of \code{sur} (or barycenter if
-#'   \code{element="triangles"}). Then, interpolation is performed by identifying
-#'    the \code{k} NNps closest to each vertex of \code{refsur} and computing the
-#'    mean of their \code{values} weighted by their distance.
+#' @details The function starts by locating a set of points (NNps) on
+#'   \code{refsur}, each being the single nearest neighbor for each vertex of
+#'   \code{sur} (or barycenter if \code{element="triangles"}). Then,
+#'   interpolation is performed by identifying the \code{k} points among NNps
+#'   being the closest to each vertex of \code{refsur} and computing the mean of
+#'   their \code{values} weighted by their distance.
 #' @export
 #' @author Marina Melchionna, Silvia Castiglione
 #' @importFrom Morpho mcNNindex vert2points barycenter
@@ -81,7 +86,7 @@ interpolMesh<-function(sur,values,refsur,refmat,
 
   allvalues<-rep(NA,nrow(clostInd))
   allvalues[nowhiteid]<-sapply((1:nrow(clostInd))[nowhiteid], function(i)
-    weighted.mean(values[clostInd[i,]],(1-RRphylo:::range01(distInd[i,]))))
+    weighted.mean(values[clostInd[i,]],(1-range01(distInd[i,]))))
 
   return(allvalues)
 }

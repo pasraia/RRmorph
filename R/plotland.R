@@ -1,23 +1,23 @@
 #' @title Plot landmarks importance on 3d mesh
 #' @description The function relates PCA loadings of a single PC axis to
 #'   individual landmarks and plots them on a 3d mesh by means of interpolation.
-#' @usage plotland(relw,sel=1,refsur=NULL,refmat=NULL,k=5,pal=NULL,
+#' @usage plotland(pca,sel=1,refsur=NULL,refmat=NULL,k=5,pal=NULL,
 #'   defo=FALSE,radius=0.001)
-#' @param relw the result of a relative warp analysis. Classes \code{relwarps} and
+#' @param pca the result of a relative warp analysis. Classes \code{relwarps} and
 #'   \code{nosymproc} are supported.
-#' @param sel numeric indicating the focal PC axis.
+#' @param sel numeric indicating the focal RW/PC axis.
 #' @param refsur the \code{mesh3d} object to plot on. If \code{NULL}, the mesh
 #'   is reconstructed by means of \code{\link[Rvcg]{vcgBallPivoting}} from the consensus
-#'   configuration derived from \code{relw}.
+#'   configuration derived from \code{pca}.
 #' @param refmat the landmark set related to \code{refsur}. If \code{NULL},
-#'   the consensus configuration derived from \code{relw} is used.
-#' @param pal a vector of color to be passed to \code{\link[grDevices]{colorRampPalette}}.
+#'   the consensus configuration derived from \code{pca} is used.
+#' @param pal a vector of colors to be passed to \code{\link[grDevices]{colorRampPalette}}.
 #' @param k the argument \code{k} passed to \code{\link{interpolMesh}}.
 #' @param defo when \code{refsur} and \code{refmat} are provided, \code{defo = TRUE}
 #'   warps \code{refsur} on the consensus shape.
 #' @param radius argument \code{radius} passed to \code{\link[rgl]{spheres3d}}
 #' @return A list including a \code{mesh3d} object colored according to landmarks
-#'   importance and a matrix of landmarks importance on each PC axis. Additionally,
+#'   importance and a matrix of landmarks importance on each RW/PC axis. Additionally,
 #'   the function returns a 3d plot of the mesh.
 #' @export
 #' @author Marina Melchionna, Silvia Castiglione, Carmela Serio, Giorgia Girardi
@@ -32,22 +32,22 @@
 #'   ldm_pan<-DataSimians$ldm_pan
 #'   sur_pan<-DataSimians$sur_pan
 #'
-#'   plotland(pca,sel=1,refsur = sur_pan,refmat = ldm_pan)
+#'   plotland(pca=pca,sel=1,refsur = sur_pan,refmat = ldm_pan)
 #'   }
 
 
-plotland<-function(relw,sel=1,
+plotland<-function(pca,sel=1,
                    refsur=NULL,refmat=NULL,
                    k=5,pal=NULL,defo=FALSE,radius=0.001){
 
-  if(inherits(relw,"relwarps")){
-    relw$mshape->mshape
-    relw$bePCs->PCs
+  if(inherits(pca,"relwarps")){
+    pca$mshape->mshape
+    pca$bePCs->PCs
   }
 
-  if(inherits(relw,"nosymproc")){
-    relw$mshape->mshape
-    relw$PCs->PCs
+  if(inherits(pca,"nosymproc")){
+    pca$mshape->mshape
+    pca$PCs->PCs
   }
 
   if((is.null(refmat)&!is.null(refsur))|(is.null(refsur)&!is.null(refmat))) {
@@ -59,9 +59,9 @@ plotland<-function(relw,sel=1,
   for(i in 1:ncol(PCs)){
     loadmats[[i]]<-matrix(PCs[,i],ncol=3,nrow=length(PCs[,1])/3)
     totload[[i]]<-apply(loadmats[[i]],1,function(y){
-      ppA <- (y %*% c(0,0,1))/RRphylo:::unitV(y)
-      ang<-RRphylo:::rad2deg(acos(ppA))
-      if(ang>90) RRphylo:::unitV(y)*-1 else RRphylo:::unitV(y)
+      ppA <- (y %*% c(0,0,1))/unitV(y)
+      ang<-rad2deg(acos(ppA))
+      if(ang>90) unitV(y)*-1 else unitV(y)
     })
   }
 

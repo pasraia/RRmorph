@@ -2,6 +2,10 @@
 #' @importFrom Morpho restoreShapes rmUnrefVertex
 #' @importFrom Rvcg vcgArea vcgBallPivoting
 
+range01 <- function(x, ...){(x - min(x, ...)) / (max(x, ...) - min(x, ...))}
+unitV <- function(x) sum(x^2)^0.5
+rad2deg <- function(rad)  (rad * 180)/(pi)
+
 areadiff<-function(mesh1,mesh2,out.rem=FALSE,scale01=TRUE,fact=1.5){
 
   area_shape1<-vcgArea(mesh1,perface=T)$pertriangle
@@ -30,7 +34,7 @@ areadiff<-function(mesh1,mesh2,out.rem=FALSE,scale01=TRUE,fact=1.5){
     diff_areas[x<tstn]<-tstn
   }else diff_areas=diff_areas
 
-  if(scale01==TRUE) diff_areas<-RRphylo:::range01(diff_areas)
+  if(scale01==TRUE) diff_areas<-range01(diff_areas)
 
   return(list("ash1"=area_shape1,"ash2"=area_shape2,"dareas"=diff_areas))
 }
