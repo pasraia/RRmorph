@@ -14,14 +14,24 @@
 
 ------------------------------------------------------------------------
 
-The goal of RRmorph is …
+The goal of `RRmorph` is to provide tools to map evolutionary rate and
+patterns directly on three-dimensional shapes. The main computational
+functions of this package are `rate.map` and `conv.map`, which are still
+also available as a part of the
+[`RRphylo`](https://cran.r-project.org/web/packages/RRphylo/index.html)
+R package (where they were first published). The reason we decided to
+move these functions in a brand new package is that we made some heavy
+changes to both of them and, in doing so, produced some additional tools
+we think might be useful to everyone deals with 3d meshes and surfaces.
+In `RRmorph`, `rate.map` and `conv.map` are able to plot evolutionary
+rates/convergence patterns on real 3d surfaces. This is done by means of
+a new function, `interpolMesh`, which transfers values related to the
+reconstructed meshes (the output of `RRphylo::rate.map` and
+`RRphylo::conv.map`) to the real 3D surfaces they were derived from.
 
 ## Installation from CRAN
 
 The package is not yet available on CRAN.
-
-``` r
-```
 
 ## Installation from github
 
