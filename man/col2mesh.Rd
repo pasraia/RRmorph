@@ -7,7 +7,7 @@
 col2mesh(mesh,values,pal,from=NULL,to=NULL,NAcol="gray90")
 }
 \arguments{
-\item{mesh}{a \code{mesh3d} object}
+\item{mesh}{a \code{mesh3d} object.}
 
 \item{values}{a vector of continuous values associated to individual vertices
 of the \code{mesh}.}

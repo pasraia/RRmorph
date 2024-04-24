@@ -7,7 +7,7 @@
 tri2verts(mesh,values)
 }
 \arguments{
-\item{mesh}{a \code{mesh3d} object}
+\item{mesh}{a \code{mesh3d} object.}
 
 \item{values}{a vector of continuous values associated to individual triangles
 of the \code{mesh}.}

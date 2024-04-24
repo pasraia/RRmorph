@@ -4,25 +4,25 @@
 \alias{plotland}
 \title{Plot landmarks importance on 3d mesh}
 \usage{
-plotland(relw,sel=1,refsur=NULL,refmat=NULL,k=5,pal=NULL,
+plotland(pca,sel=1,refsur=NULL,refmat=NULL,k=5,pal=NULL,
   defo=FALSE,radius=0.001)
 }
 \arguments{
-\item{relw}{the result of a relative warp analysis. Classes \code{relwarps} and
+\item{pca}{the result of a relative warp analysis. Classes \code{relwarps} and
 \code{nosymproc} are supported.}
 
-\item{sel}{numeric indicating the focal PC axis.}
+\item{sel}{numeric indicating the focal RW/PC axis.}
 
 \item{refsur}{the \code{mesh3d} object to plot on. If \code{NULL}, the mesh
 is reconstructed by means of \code{\link[Rvcg]{vcgBallPivoting}} from the consensus
-configuration derived from \code{relw}.}
+configuration derived from \code{pca}.}
 
 \item{refmat}{the landmark set related to \code{refsur}. If \code{NULL},
-the consensus configuration derived from \code{relw} is used.}
+the consensus configuration derived from \code{pca} is used.}
 
 \item{k}{the argument \code{k} passed to \code{\link{interpolMesh}}.}
 
-\item{pal}{a vector of color to be passed to \code{\link[grDevices]{colorRampPalette}}.}
+\item{pal}{a vector of colors to be passed to \code{\link[grDevices]{colorRampPalette}}.}
 
 \item{defo}{when \code{refsur} and \code{refmat} are provided, \code{defo = TRUE}
 warps \code{refsur} on the consensus shape.}
@@ -31,7 +31,7 @@ warps \code{refsur} on the consensus shape.}
 }
 \value{
 A list including a \code{mesh3d} object colored according to landmarks
-  importance and a matrix of landmarks importance on each PC axis. Additionally,
+  importance and a matrix of landmarks importance on each RW/PC axis. Additionally,
   the function returns a 3d plot of the mesh.
 }
 \description{
@@ -46,7 +46,7 @@ The function relates PCA loadings of a single PC axis to
   ldm_pan<-DataSimians$ldm_pan
   sur_pan<-DataSimians$sur_pan
 
-  plotland(pca,sel=1,refsur = sur_pan,refmat = ldm_pan)
+  plotland(pca=pca,sel=1,refsur = sur_pan,refmat = ldm_pan)
   }
 }
 \author{

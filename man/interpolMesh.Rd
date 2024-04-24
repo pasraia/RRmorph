@@ -7,10 +7,12 @@
 interpolMesh(sur,values,refsur,refmat,element=c("triangles","vertices"),k=4)
 }
 \arguments{
-\item{sur}{a reconstructed \code{mesh3d} object with vertices matching to \code{refmat}.}
+\item{sur}{a reconstructed \code{mesh3d} object with vertices matching to
+\code{refmat}.}
 
 \item{values}{the vector of values related to \code{sur} to be interpolated.
-\code{values} can be related to either triangles or vertices (see \code{element}).}
+\code{values} can be related to either triangles or vertices (see
+\code{element}).}
 
 \item{refsur}{the reference mesh (\code{mesh3d} object) to interpolate the
 \code{values} on.}
@@ -18,25 +20,27 @@ interpolMesh(sur,values,refsur,refmat,element=c("triangles","vertices"),k=4)
 \item{refmat}{the landmark set related to \code{refsur}.}
 
 \item{element}{one of \code{"triangles"} or \code{"vertices"}, depending on
-which of them values is related to.}
+which of them \code{values} is related to.}
 
-\item{k}{the number of nearest neighbor vertices used for interpolation (see details).}
+\item{k}{the number of nearest neighbor vertices used for interpolation (see
+details).}
 }
 \value{
 The vector of values related to each vertex of \code{refsur}.
 }
 \description{
-The function takes a reconstructed \code{mesh3d} object (\code{sur})
-  with some related \code{values} (to either triangles or vertices of the mesh)
-  and transfers such values to the real mesh (\code{refsur}) from which \code{sur}
-  was derived.
+The function takes a reconstructed \code{mesh3d} object
+  (\code{sur}) with some related \code{values} (to either triangles or
+  vertices of the mesh) and transfers such values to the real mesh
+  (\code{refsur}) from which \code{sur} was derived.
 }
 \details{
-The function starts by locating a set of points (NNps) on \code{refsur},
-   each being the single nearest neighbor for each vertex of \code{sur} (or barycenter if
-  \code{element="triangles"}). Then, interpolation is performed by identifying
-   the \code{k} NNps closest to each vertex of \code{refsur} and computing the
-   mean of their \code{values} weighted by their distance.
+The function starts by locating a set of points (NNps) on
+  \code{refsur}, each being the single nearest neighbor for each vertex of
+  \code{sur} (or barycenter if \code{element="triangles"}). Then,
+  interpolation is performed by identifying the \code{k} points among NNps
+  being the closest to each vertex of \code{refsur} and computing the mean of
+  their \code{values} weighted by their distance.
 }
 \examples{
   \dontrun{
