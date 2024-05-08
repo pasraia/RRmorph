@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# RRmorph
+# RRmorph <img src="inst/figures/RRmorph_logo.png" align="right" width="160" height="160"/>
 
 <!-- badges: start -->
 <!-- [![R-CMD-check](https://github.com/pedrocoutinhosilva/hexFinder/workflows/R-CMD-check/badge.svg)](https://CRAN.R-project.org/package=hexFinder) -->
