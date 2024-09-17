@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# RRmorph <img src="inst/figures/RRmorph_logo.png" align="right" width="160" height="160"/>
+# RRmorph <img src="inst/figures/RRmorph_logo.png" align="right" width="140" height="160"/>
 
 <!-- badges: start -->
 <!-- [![R-CMD-check](https://github.com/pedrocoutinhosilva/hexFinder/workflows/R-CMD-check/badge.svg)](https://CRAN.R-project.org/package=hexFinder) -->
@@ -18,16 +18,27 @@ The goal of `RRmorph` is to provide tools to map evolutionary rate and
 patterns directly on three-dimensional shapes. The main computational
 functions of this package are `rate.map` and `conv.map`, which are still
 also available as a part of the
-[`RRphylo`](https://cran.r-project.org/web/packages/RRphylo/index.html)
-R package (where they were first published). The reason we decided to
-move these functions in a brand new package is that we made some heavy
-changes to both of them and, in doing so, produced some additional tools
-we think might be useful to everyone deals with 3d meshes and surfaces.
-In `RRmorph`, `rate.map` and `conv.map` are able to plot evolutionary
+[`RRphylo`](https://CRAN.R-project.org/package=RRphylo) R package (where
+they were first published). The reason we decided to move these
+functions in a brand new package is that we made some heavy changes to
+both of them and, in doing so, produced some additional tools we think
+might be useful to everyone deals with 3d meshes and surfaces. In
+`RRmorph`, `rate.map` and `conv.map` are able to plot evolutionary
 rates/convergence patterns on real 3d surfaces. This is done by means of
 a new function, `interpolMesh`, which transfers values related to the
 reconstructed meshes (the output of `RRphylo::rate.map` and
 `RRphylo::conv.map`) to the real 3D surfaces they were derived from.
+
+## Reference paper and material
+
+Melchionna, M., Castiglione, S., Girardi, G., Serio, C., Esposito, A.,
+Mondanaro, A., Profico, A., Sansalone, G., & Raia, P.(2024). RRmorph—a
+new R package to map phenotypic evolutionary rates and patterns on 3D
+meshes. Communications Biology 7: 1009.doi:10.1038/s42003-024-06710-8
+
+To replicate the analyses presented in Melchionna et al. 2024 please
+follow the link:
+<https://github.com/pasraia/Supporting-Material-Melchionna-et-al.-2024>
 
 ## Installation from CRAN
 
