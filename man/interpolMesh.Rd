@@ -48,6 +48,7 @@ The function starts by locating a set of points (NNps) on
   download.file(url=da,destfile = paste0(tempdir(),"/RRmorphdata.rda"))
   load(paste0(tempdir(),"/RRmorphdata.rda"))
 
+  options(rgl.useNULL=TRUE)
   require(rgl)
   require(Morpho)
   require(Rvcg)

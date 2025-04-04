@@ -4,6 +4,11 @@ if (!requireNamespace("rmarkdown", quietly = TRUE) ||
    warning(call. = FALSE, "Pandoc not found, the vignettes is not built")
    knitr::knit_exit()
 }
+misspacks<-sapply(c("rgl","Morpho","Rvcg"),requireNamespace,quietly=TRUE)
+if(any(!misspacks)){
+  warning(call. = FALSE,paste(names(misspacks)[which(!misspacks)],collapse=", "), "not found, the vignettes is not built")
+   knitr::knit_exit()
+}
 
 knitr::opts_chunk$set(
   collapse = TRUE,

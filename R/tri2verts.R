@@ -11,12 +11,10 @@
 #' @author Marina Melchionna, Silvia Castiglione
 #' @examples
 #'   \donttest{
-#'   require(rgl)
 #'   da<-"https://github.com/pasraia/RRmorph_example_data/raw/refs/heads/main/RRmorphdata.rda"
 #'   download.file(url=da,destfile = paste0(tempdir(),"/RRmorphdata.rda"))
 #'   load(paste0(tempdir(),"/RRmorphdata.rda"))
 #'
-#'   options(rgl.useNULL=TRUE)
 #'   require(Morpho)
 #'   require(Rvcg)
 #'

@@ -47,6 +47,7 @@ The function reconstructs two specimens' meshes (\code{x})
   download.file(url=da,destfile = paste0(tempdir(),"/RRmorphdata.rda"))
   load(paste0(tempdir(),"/RRmorphdata.rda"))
 
+  options(rgl.useNULL=TRUE)
   require(Morpho)
 
   pca<-procSym(endo.set)

@@ -28,6 +28,7 @@ Assuming a \code{mesh} is colored according to a vector of \code{values},
   download.file(url=da,destfile = paste0(tempdir(),"/RRmorphdata.rda"))
   load(paste0(tempdir(),"/RRmorphdata.rda"))
 
+  options(rgl.useNULL=TRUE)
   require(rgl)
   require(Morpho)
   require(Rvcg)
