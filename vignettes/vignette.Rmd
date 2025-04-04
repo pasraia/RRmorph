@@ -18,11 +18,9 @@ if (!requireNamespace("rmarkdown", quietly = TRUE) ||
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>")
-options(rgl.useNULL = TRUE)
-rgl::setupKnitr(autoprint = TRUE)
 
 options(rmarkdown.html_vignette.check_title = FALSE,mc.cores=2,rgl.useNULL=TRUE)
-load("vignette_data.rda")
+load("vignette_data.Rda")
 library(RRmorph)
 library(Morpho)
 library(Rvcg)
