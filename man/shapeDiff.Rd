@@ -42,18 +42,22 @@ The function reconstructs two specimens' meshes (\code{x})
   on provided meshes (\code{refsur}).
 }
 \examples{
-  \dontrun{
-  require(rgl)
-  data(DataSimians)
-  pca<-DataSimians$pca
-  ldm_pan<-DataSimians$ldm_pan
-  sur_pan<-DataSimians$sur_pan
-  ldm_alo<-DataSimians$ldm_alo
-  sur_alo<-DataSimians$sur_alo
+  \donttest{
+  da<-"https://github.com/pasraia/RRmorph_example_data/raw/refs/heads/main/RRmorphdata.rda"
+  download.file(url=da,destfile = paste0(tempdir(),"/RRmorphdata.rda"))
+  load(paste0(tempdir(),"/RRmorphdata.rda"))
 
-  diffs<-shapeDiff(x=c("Pan_troglodytes","Alouatta_caraya"),
-                   pca = pca,refsur = list(sur_pan,sur_alo),
-                   refmat = list(ldm_pan,ldm_alo))
+  require(Morpho)
+
+  pca<-procSym(endo.set)
+  ldm_homo<-endo.set[,,"Homo_sapiens"]
+  sur_homo<-endo.sur[["Homo_sapiens"]]
+  ldm_macaca<-endo.set[,,"Macaca_fuscata"]
+  sur_macaca<-endo.sur[["Macaca_fuscata"]]
+
+  diffs<-shapeDiff(x=c("Homo_sapiens","Macaca_fuscata"),
+                   pca = pca,refsur = list(sur_homo,sur_macaca),
+                   refmat = list(ldm_homo,ldm_macaca))
   }
 }
 \author{

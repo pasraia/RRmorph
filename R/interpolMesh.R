@@ -29,32 +29,39 @@
 #' @importFrom Morpho mcNNindex vert2points barycenter
 #' @importFrom stats dist weighted.mean
 #' @examples
-#'   \dontrun{
-#'   require(rgl)
-#'   data(DataSimians)
-#'   pca<-DataSimians$pca
-#'   ldm_pan<-DataSimians$ldm_pan
-#'   sur_pan<-DataSimians$sur_pan
+#'   \donttest{
+#'   da<-"https://github.com/pasraia/RRmorph_example_data/raw/refs/heads/main/RRmorphdata.rda"
+#'   download.file(url=da,destfile = paste0(tempdir(),"/RRmorphdata.rda"))
+#'   load(paste0(tempdir(),"/RRmorphdata.rda"))
 #'
-#'   rec_pan<- Rvcg::vcgBallPivoting(pca$mshape, radius = 0)
-#'   rec_pan$vb[1:3,]<-t(ldm_pan)
+#'   require(rgl)
+#'   require(Morpho)
+#'   require(Rvcg)
+#'
+#'   pca<-procSym(endo.set)
+#'   ldm<-endo.set[,,"Homo_sapiens"]
+#'   sur<-endo.sur[["Homo_sapiens"]]
+#'
+#'   rec<- vcgBallPivoting(pca$mshape, radius = 0)
+#'   rec$vb[1:3,]<-t(ldm)
+#'   val1<-rnorm(ncol(rec$vb))
 #'
 #'   # Interpolate values associated to vertices
-#'   val1<-rnorm(ncol(rec_pan$vb))
-#'   interp1<-interpolMesh(sur = rec_pan,refsur = sur_pan,refmat = ldm_pan,
-#'                        values = val1,element ="vertices",k = 4)
+#'   val1<-rnorm(ncol(rec$vb))
+#'   interp1<-interpolMesh(sur = rec,refsur = sur,refmat = ldm,
+#'                         values = val1,element ="vertices",k = 4)
 #'
-#'   colmesh1<-col2mesh(mesh = sur_pan,values = interp1,pal = heat.colors(5))
+#'   colmesh1<-col2mesh(mesh = sur,values = interp1,pal = heat.colors(5))
 #'   open3d()
 #'   shade3d(colmesh1,specular="black")
 #'
 #'
 #'   # Interpolate values associated to triangles
-#'   val2<-rnorm(ncol(rec_pan$it))
-#'   interp2<-interpolMesh(sur = rec_pan,refsur = sur_pan,refmat = ldm_pan,
-#'                        values = val2,element ="triangles",k = 4)
+#'   val2<-rnorm(ncol(rec$it))
+#'   interp2<-interpolMesh(sur = rec,refsur = sur,refmat = ldm,
+#'                         values = val2,element ="triangles",k = 4)
 #'
-#'   colmesh2<-col2mesh(mesh = sur_pan,values = interp2,pal = heat.colors(5))
+#'   colmesh2<-col2mesh(mesh = sur,values = interp2,pal = heat.colors(5))
 #'   open3d()
 #'   shade3d(colmesh2,specular="black")
 #'   }

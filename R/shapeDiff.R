@@ -26,18 +26,22 @@
 #' @author Marina Melchionna, Silvia Castiglione
 #' @importFrom Morpho closemeshKD
 #' @examples
-#'   \dontrun{
-#'   require(rgl)
-#'   data(DataSimians)
-#'   pca<-DataSimians$pca
-#'   ldm_pan<-DataSimians$ldm_pan
-#'   sur_pan<-DataSimians$sur_pan
-#'   ldm_alo<-DataSimians$ldm_alo
-#'   sur_alo<-DataSimians$sur_alo
+#'   \donttest{
+#'   da<-"https://github.com/pasraia/RRmorph_example_data/raw/refs/heads/main/RRmorphdata.rda"
+#'   download.file(url=da,destfile = paste0(tempdir(),"/RRmorphdata.rda"))
+#'   load(paste0(tempdir(),"/RRmorphdata.rda"))
 #'
-#'   diffs<-shapeDiff(x=c("Pan_troglodytes","Alouatta_caraya"),
-#'                    pca = pca,refsur = list(sur_pan,sur_alo),
-#'                    refmat = list(ldm_pan,ldm_alo))
+#'   require(Morpho)
+#'
+#'   pca<-procSym(endo.set)
+#'   ldm_homo<-endo.set[,,"Homo_sapiens"]
+#'   sur_homo<-endo.sur[["Homo_sapiens"]]
+#'   ldm_macaca<-endo.set[,,"Macaca_fuscata"]
+#'   sur_macaca<-endo.sur[["Macaca_fuscata"]]
+#'
+#'   diffs<-shapeDiff(x=c("Homo_sapiens","Macaca_fuscata"),
+#'                    pca = pca,refsur = list(sur_homo,sur_macaca),
+#'                    refmat = list(ldm_homo,ldm_macaca))
 #'   }
 
 shapeDiff<-function(x,pca,refsur,refmat,mshape_sur=NULL,
@@ -78,8 +82,8 @@ shapeDiff<-function(x,pca,refsur,refmat,mshape_sur=NULL,
   values<-mapply(a=sur,b=refsur,c=refmat,d=diffs, function(a,b,c,d)
     interpolMesh(a,d,b,c,element="point"), SIMPLIFY = FALSE)
 
-  rgl::open3d()
-  rgl::mfrow3d(1,2,sharedMouse = TRUE)
+  open3d()
+  mfrow3d(1,2,sharedMouse = TRUE)
 
   meshes<-list()
 
@@ -87,9 +91,9 @@ shapeDiff<-function(x,pca,refsur,refmat,mshape_sur=NULL,
     meshes[[w]]<-col2mesh(refsur[[w]],values[[w]],pal,NAcol=NAcol)
     plotLegend(meshes[[w]],values[[w]],main=x[w])
 
-    if(w==2) rgl::next3d()
-    rgl::shade3d(meshes[[w]], specular = "black")
-    if (show.names) rgl::mtext3d(text = paste(x[w]), font = 2,edge = "x", line = 3)
+    if(w==2) next3d()
+    shade3d(meshes[[w]], specular = "black")
+    if (show.names) mtext3d(text = paste(x[w]), font = 2,edge = "x", line = 3)
 
   }
 

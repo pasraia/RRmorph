@@ -24,15 +24,21 @@
 #' @importFrom grDevices colorRampPalette
 #' @importFrom Morpho tps3d rotmesh.onto
 #' @importFrom Rvcg vcgArea vcgBallPivoting
+#' @importFrom rgl spheres3d
 #' @examples
-#'   \dontrun{
-#'   require(rgl)
-#'   data(DataSimians)
-#'   pca<-DataSimians$pca
-#'   ldm_pan<-DataSimians$ldm_pan
-#'   sur_pan<-DataSimians$sur_pan
+#'   \donttest{
+#'   da<-"https://github.com/pasraia/RRmorph_example_data/raw/refs/heads/main/RRmorphdata.rda"
+#'   download.file(url=da,destfile = paste0(tempdir(),"/RRmorphdata.rda"))
+#'   load(paste0(tempdir(),"/RRmorphdata.rda"))
 #'
-#'   plotland(pca=pca,sel=1,refsur = sur_pan,refmat = ldm_pan)
+#'   require(rgl)
+#'   require(Morpho)
+#'
+#'   pca<-procSym(endo.set)
+#'   ldm<-endo.set[,,"Homo_sapiens"]
+#'   sur<-endo.sur[["Homo_sapiens"]]
+#'
+#'   plotland(pca=pca,sel=1,refsur = sur,refmat = ldm)
 #'   }
 
 
@@ -85,9 +91,9 @@ plotland<-function(pca,sel=1,
   mesh<-col2mesh(temp_sur,values,pal = pal)
   id<-mcNNindex(temp_sur,mat,k = 1)[,1]
 
-  rgl::open3d()
-  rgl::shade3d(mesh,specular="black")
-  rgl::spheres3d(mat,radius=radius,col=mesh$material$color[id])
+  open3d()
+  shade3d(mesh,specular="black")
+  spheres3d(mat,radius=radius,col=mesh$material$color[id])
   plotLegend(mesh,values,main=NULL)
 
   return(list(mesh=temp_sur,totload=totload))

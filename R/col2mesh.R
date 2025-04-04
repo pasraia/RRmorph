@@ -15,21 +15,27 @@
 #' @author Marina Melchionna, Silvia Castiglione
 #' @importFrom stats na.omit
 #' @examples
-#'   \dontrun{
+#'   \donttest{
+#'   da<-"https://github.com/pasraia/RRmorph_example_data/raw/refs/heads/main/RRmorphdata.rda"
+#'   download.file(url=da,destfile = paste0(tempdir(),"/RRmorphdata.rda"))
+#'   load(paste0(tempdir(),"/RRmorphdata.rda"))
+#'
 #'   require(rgl)
-#'   data(DataSimians)
-#'   pca<-DataSimians$pca
-#'   ldm_pan<-DataSimians$ldm_pan
-#'   sur_pan<-DataSimians$sur_pan
+#'   require(Morpho)
+#'   require(Rvcg)
 #'
-#'   rec_pan<- Rvcg::vcgBallPivoting(pca$mshape, radius = 0)
-#'   rec_pan$vb[1:3,]<-t(ldm_pan)
-#'   val<-rnorm(ncol(rec_pan$vb))
+#'   pca<-procSym(endo.set)
+#'   ldm<-endo.set[,,"Homo_sapiens"]
+#'   sur<-endo.sur[["Homo_sapiens"]]
 #'
-#'   interp<-interpolMesh(sur = rec_pan,refsur = sur_pan,refmat = ldm_pan,
+#'   rec<- vcgBallPivoting(pca$mshape, radius = 0)
+#'   rec$vb[1:3,]<-t(ldm)
+#'   val<-rnorm(ncol(rec$vb))
+#'
+#'   interp<-interpolMesh(sur = rec,refsur = sur,refmat = ldm,
 #'                        values = val,element ="vertices",k = 4)
 #'
-#'   colmesh<-col2mesh(mesh = sur_pan,values = interp,pal = heat.colors(5))
+#'   colmesh<-col2mesh(mesh = sur,values = interp,pal = heat.colors(5))
 #'   plotLegend(mesh = colmesh,values = interp, main = "Pan troglodytes")
 #'   open3d()
 #'   shade3d(colmesh,specular="black")

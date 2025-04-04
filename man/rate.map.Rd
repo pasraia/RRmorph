@@ -90,27 +90,32 @@ After selecting the RW (PC) axes, \code{rate.map} automatically
   onto them (see \code{\link{interpolMesh}} for further details).
 }
 \examples{
-  \dontrun{
-  data(DataSimians)
-  pca<-DataSimians$pca
-  tree<-DataSimians$tree
-  dato<-pca$PCscores
-  cc<- 2/parallel::detectCores()
+  \donttest{
+  da<-"https://github.com/pasraia/RRmorph_example_data/raw/refs/heads/main/RRmorphdata.rda"
+  download.file(url=da,destfile = paste0(tempdir(),"/RRmorphdata.rda"))
+  load(paste0(tempdir(),"/RRmorphdata.rda"))
 
-  RR<-RRphylo::RRphylo(tree,dato,clus=cc)
+  require(Morpho)
+  require(Rvcg)
+
+  pca<-procSym(endo.set)
+  ldm_homo<-endo.set[,,"Homo_sapiens"]
+  sur_homo<-endo.sur[["Homo_sapiens"]]
+  ldm_macaca<-endo.set[,,"Macaca_fuscata"]
+  sur_macaca<-endo.sur[["Macaca_fuscata"]]
+
+  cc<- 2/parallel::detectCores()
+  RR<-RRphylo::RRphylo(tree.prima,pca$PCscores,clus=cc)
 
   # plotting on reconstructed surfaces
-  Rmap1<-rate.map(x=c("Pan_troglodytes","Alouatta_caraya"),RR=RR, scores=dato,
-                 pcs=pca$PCs, mshape=pca$mshape)
+  Rmap1<-rate.map(x=c("Homo_sapiens","Macaca_fuscata"),RR=RR, scores=pca$PCscores,
+                  pcs=pca$PCs, mshape=pca$mshape)
 
   # plotting on real surfaces
-  Rmap2<-rate.map(x=c("Pan_troglodytes","Alouatta_caraya"),RR=RR, scores=dato,
-                 pcs=pca$PCs, mshape=pca$mshape,
-                 refsur=list("Pan_troglodytes"=sur_pan,"Alouatta_caraya"=sur_alo),
-                 refmat=list("Pan_troglodytes"=ldm_pan,"Alouatta_caraya"=ldm_alo))
-
-
-
+  Rmap2<-rate.map(x=c("Homo_sapiens","Macaca_fuscata"),RR=RR, scores=pca$PCscores,
+                  pcs=pca$PCs, mshape=pca$mshape,
+                  refsur=list("Homo_sapiens"=sur_homo,"Macaca_fuscata"=sur_macaca),
+                  refmat=list("Homo_sapiens"=ldm_homo,"Macaca_fuscata"=ldm_macaca))
   }
 }
 \references{
@@ -123,7 +128,7 @@ Schlager, S. (2017). \emph{Morpho and Rvcg-Shape Analysis in R:
   digital models. Palaeontology. doi:10.1111/pala.12582
 }
 \seealso{
-\href{../doc/RRphylo.html}{\code{RRphylo} vignette} ;
+\href{https://CRAN.R-project.org/package=RRphylo/vignettes/RRphylo.html}{\code{RRphylo} vignette} ;
   \code{\link[Morpho]{relWarps}} ; \code{\link[Morpho]{procSym}}
 }
 \author{

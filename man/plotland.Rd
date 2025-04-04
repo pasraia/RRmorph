@@ -39,14 +39,19 @@ The function relates PCA loadings of a single PC axis to
   individual landmarks and plots them on a 3d mesh by means of interpolation.
 }
 \examples{
-  \dontrun{
-  require(rgl)
-  data(DataSimians)
-  pca<-DataSimians$pca
-  ldm_pan<-DataSimians$ldm_pan
-  sur_pan<-DataSimians$sur_pan
+  \donttest{
+  da<-"https://github.com/pasraia/RRmorph_example_data/raw/refs/heads/main/RRmorphdata.rda"
+  download.file(url=da,destfile = paste0(tempdir(),"/RRmorphdata.rda"))
+  load(paste0(tempdir(),"/RRmorphdata.rda"))
 
-  plotland(pca=pca,sel=1,refsur = sur_pan,refmat = ldm_pan)
+  require(rgl)
+  require(Morpho)
+
+  pca<-procSym(endo.set)
+  ldm<-endo.set[,,"Homo_sapiens"]
+  sur<-endo.sur[["Homo_sapiens"]]
+
+  plotland(pca=pca,sel=1,refsur = sur,refmat = ldm)
   }
 }
 \author{

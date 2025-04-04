@@ -69,6 +69,7 @@
 #'   \code{\link[Morpho]{relWarps}} ; \code{\link[Morpho]{procSym}}
 #' @importFrom grDevices rainbow
 #' @importFrom utils combn
+#' @importFrom rgl layout3d
 #' @return The function returns a list including:
 #'   \itemize{\item\strong{$angle.compare}: a data frame including the real angles
 #'   between species shape vectors \code{$real.angle}, the angles computed between vectors
@@ -87,43 +88,48 @@
 #' @references Schlager, S. (2017). \emph{Morpho and Rvcg–Shape Analysis in R:
 #'   R-Packages for geometric morphometrics, shape analysis and surface
 #'   manipulations.} In: Statistical shape and deformation analysis. Academic
-#'   Press. Melchionna, M., Profico, A., Castiglione, S., Serio, C., Mondanaro,
+#'   Press.
+#' @references Melchionna, M., Profico, A., Castiglione, S., Serio, C., Mondanaro,
 #'   A., Modafferi, M., Tamagnini, D., Maiorano, L. , Raia, P., Witmer, L.M.,
 #'   Wroe, S., & Sansalone, G. (2021). A method for mapping morphological
 #'   convergence on three-dimensional digital models: the case of the mammalian
-#'   sabre-tooth. Palaeontology, 64, 573–584. doi:10.1111/pala.12542
+#'   sabre-tooth. \emph{Palaeontology}, 64, 573–584. doi:10.1111/pala.12542
 #' @examples
-#'   \dontrun{
-#'   data(DataSimians)
-#'   pca<-DataSimians$pca
-#'   ldm_pan<-DataSimians$ldm_pan
-#'   sur_pan<-DataSimians$sur_pan
-#'   ldm_alo<-DataSimians$ldm_alo
-#'   sur_alo<-DataSimians$sur_alo
+#'   \donttest{
+#'   da<-"https://github.com/pasraia/RRmorph_example_data/raw/refs/heads/main/RRmorphdata.rda"
+#'   download.file(url=da,destfile = paste0(tempdir(),"/RRmorphdata.rda"))
+#'   load(paste0(tempdir(),"/RRmorphdata.rda"))
+#'
+#'   require(Morpho)
+#'
+#'   pca<-procSym(endo.set)
+#'   ldm_homo<-endo.set[,,"Homo_sapiens"]
+#'   sur_homo<-endo.sur[["Homo_sapiens"]]
+#'   ldm_macaca<-endo.set[,,"Macaca_fuscata"]
+#'   sur_macaca<-endo.sur[["Macaca_fuscata"]]
+#'
 #'
 #'   # Convergence within group plotted on reconstructed surfaces
-#'   cm1<-conv.map(x1=c("Pan_troglodytes","Gorilla_gorilla","Pongo_pygmaeus"),
+#'   cm1<-conv.map(x1=c("Pan_troglodytes","Gorilla_gorilla","Pongo_abelii"),
 #'                 scores=pca$PCscores,pcs=pca$PCs,mshape=pca$mshape,
 #'                 focal=c("Pan_troglodytes","Gorilla_gorilla"))
 #'
 #'   # Convergence between group plotted on reconstructed surfaces
-#'   cm2<-conv.map(x1=c("Pongo_pygmaeus"),x2=c("Alouatta_caraya"),
+#'   cm2<-conv.map(x1=c("Pongo_abelii"),x2=c("Alouatta_caraya"),
 #'                 scores=pca$PCscores,pcs=pca$PCs,mshape=pca$mshape,
 #'                 focal="Alouatta_caraya")
 #'
 #'   # Convergence within group plotted on real surfaces
-#'   cm3<-conv.map(x1=c("Pan_troglodytes","Gorilla_gorilla","Pongo_pygmaeus"),
+#'   cm3<-conv.map(x1=c("Homo_sapiens","Gorilla_gorilla","Pongo_abelii"),
 #'                 scores=pca$PCscores,pcs=pca$PCs,mshape=pca$mshape,
-#'                 refsur=list("Pan_troglodytes"=sur_pan),
-#'                 refmat=list("Pan_troglodytes"=ldm_pan))
+#'                 refsur=list("Homo_sapiens"=sur_homo),
+#'                 refmat=list("Homo_sapiens"=ldm_homo))
 #'
 #'   # Convergence between group plotted on real surfaces
-#'   cm3<-conv.map(x1=c("Pan_troglodytes","Pongo_pygmaeus"),x2=c("Alouatta_caraya"),
+#'   cm3<-conv.map(x1=c("Homo_sapiens","Pongo_abelii"),x2=c("Macaca_fuscata"),
 #'                 scores=pca$PCscores,pcs=pca$PCs,mshape=pca$mshape,
-#'                 refsur=list("Pan_troglodytes"=sur_pan,"Alouatta_caraya"=sur_alo),
-#'                 refmat=list("Pan_troglodytes"=ldm_pan,"Alouatta_caraya"=ldm_alo))
-#'
-#'
+#'                 refsur=list("Homo_sapiens"=sur_homo,"Macaca_fuscata"=sur_macaca),
+#'                 refmat=list("Homo_sapiens"=ldm_homo,"Macaca_fuscata"=ldm_macaca))
 #'   }
 
 
@@ -142,16 +148,10 @@ conv.map<-function (x1,x2=NULL,
   # require(Rvcg)
   # require(Morpho)
 
-  if (!requireNamespace("inflection", quietly = TRUE)) {
-    stop("Package \"inflection\" needed for this function to work. Please install it.",
-         call. = FALSE)
-  }
-  if (!requireNamespace("ddpcr", quietly = TRUE)) {
-    stop("Package \"ddpcr\" needed for this function to work. Please install it.",
-         call. = FALSE)
-  }
-  if (!requireNamespace("rgl", quietly = TRUE)) {
-    stop("Package \"rgl\" needed for this function to work. Please install it.",
+  misspacks<-sapply(c("inflection","ddpcr"),requireNamespace,quietly=TRUE)
+  if(any(!misspacks)){
+    stop("The following package/s are needed for this function to work, please install it/them:\n ",
+         paste(names(misspacks)[which(!misspacks)],collapse=", "),
          call. = FALSE)
   }
 
@@ -201,7 +201,7 @@ conv.map<-function (x1,x2=NULL,
   # selected <- sapply(selected, function(x) paste("S",x,sep = ""))
 
   if (is.null(mshape_sur))
-    mshape_sur <- Rvcg::vcgBallPivoting(mshape, radius = 0)
+    mshape_sur <- vcgBallPivoting(mshape, radius = 0)
 
   surfs.sp<-list()
   for(j in 1:length(c(x1,x2))){
@@ -367,22 +367,22 @@ conv.map<-function (x1,x2=NULL,
 
       diag(matplot)<-max(matplot)+seq(1,length(plotsp))
 
-      rgl::open3d()
-      rgl::layout3d(matplot, sharedMouse = TRUE)
+      open3d()
+      layout3d(matplot, sharedMouse = TRUE)
       for (i in 1:length(meshes1)) {
-        rgl::shade3d(meshes1[[i]], specular = "black")
-        rgl::next3d()
+        shade3d(meshes1[[i]], specular = "black")
+        next3d()
       }
       for (i in 1:length(meshes2)) {
-        rgl::shade3d(meshes2[[i]], specular = "black")
-        rgl::next3d()
+        shade3d(meshes2[[i]], specular = "black")
+        next3d()
       }
       for (i in 1:length(plotsp)) {
-        rgl::spheres3d(mshape, radius = 1e-19)
-        rgl::mtext3d(text = paste(plotsp[i]), font = 2,
+        spheres3d(mshape, radius = 1e-19)
+        mtext3d(text = paste(plotsp[i]), font = 2,
                      edge = "y", line = 3)
 
-        if(i < length(plotsp)) rgl::next3d()
+        if(i < length(plotsp)) next3d()
 
       }
       colmap_tot <- colorRampPalette(v.pale)
