@@ -49,6 +49,8 @@ jobs:
         config: ${{ fromJson(needs.setup.outputs.containers) }}
     container:
       image: ${{ matrix.config.container }}
+    env:
+      RGL_USE_NULL: TRUE
 
     steps:
       - uses: r-hub/actions/checkout@v1
@@ -74,6 +76,8 @@ jobs:
       fail-fast: false
       matrix:
         config: ${{ fromJson(needs.setup.outputs.platforms) }}
+      env:
+        RGL_USE_NULL: TRUE
 
     steps:
       - uses: r-hub/actions/checkout@v1

@@ -34,7 +34,6 @@
 #'   download.file(url=da,destfile = paste0(tempdir(),"/RRmorphdata.rda"))
 #'   load(paste0(tempdir(),"/RRmorphdata.rda"))
 #'
-#'   options(rgl.useNULL=TRUE)  # do not run this line to see the rgl plots
 #'   require(rgl)
 #'   require(Morpho)
 #'   require(Rvcg)
