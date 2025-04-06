@@ -19,3 +19,52 @@ bibentry(bibtype= "Article",
                         "Communications Biology 7: 1009.",
                         "doi:10.1038/s42003-024-06710-8")
 )
+
+citHeader("conv.map")
+bibentry(bibtype= "Article",
+         title= "A method for mapping morphological convergence on three-dimensional digital models: the case of the mammalian sabre‐tooth",
+         author= c(person("Marina Melchionna"),
+         person("Antonio Profico"),
+         person("Silvia Castiglione"),
+         person("Carmela Serio"),
+         person("Alessandro Mondanaro"),
+         person("Maria Modafferi"),
+         person("Davide Tamagnini"),
+         person("Luigi Maiorano"),
+         person("Pasquale Raia"),
+         person("Lawrence M. Witmer"),
+         person("Stephen Wroe"),
+         person("Gabriele Sansalone")),
+         journal= "Palaeontology",
+         year= "2021",
+         volume= "64",
+         pages= "573-584",
+         doi= "10.1111/pala.12542",
+         textVersion= paste("Melchionna, M., Profico, A., Castiglione, S., Serio, C., Mondanaro, A., Modafferi, M., Tamagnini, D., Maiorano, L. , Raia, P., Witmer, L.M., Wroe, S., & Sansalone, G.(2021).",
+                        "A method for mapping morphological convergence on three-dimensional digital models: the case of the mammalian sabre‐tooth.",
+                        "Palaeontology, 64: 573–584.",
+                        "doi:10.1111/pala.12542")
+)
+
+citHeader("rate.map")
+bibentry(bibtype= "Article",
+         title= "RRmorph—a new R package to map phenotypic evolutionary rates and patterns on 3D meshes",
+         author= c(person("Silvia Castiglione"),
+         person("Marina Melchionna"),
+         person("Antonio Profico"),
+         person("Gabriele Sansalone"),
+         person("Maria Modafferi"),
+         person("Alessandro Mondanaro"),
+         person("Stephen Wroe"),
+         person("Paolo Piras"),
+         person("Pasquale Raia")),
+         journal= "Palaeontology",
+         year= "2021",
+         volume= "65",
+         pages= "e12582",
+         doi= "10.1111/pala.12582",
+         textVersion= paste("Castiglione, S., Melchionna, M., Profico, A., Sansalone, G., Modafferi, M., Mondanaro, A., Wroe, S., Piras, P., & Raia, P. (2021).",
+                        "Human face-off: a new method for mapping evolutionary rates on three-dimensional digital models.",
+                        "Palaeontology 65: e12582.",
+                        "doi:10.1111/pala.12582")
+)

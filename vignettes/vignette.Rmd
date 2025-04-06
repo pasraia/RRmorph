@@ -70,7 +70,10 @@ library(Rvcg)
 library(rgl)
 library(Arothron)
 
-load("RRmorphdata.rda")
+setwd("YOUR_DIRECTORY")
+da<-"https://github.com/pasraia/RRmorph_example_data/raw/refs/heads/main/RRmorphdata.rda"
+download.file(url=da,destfile = paste0(getwd(),"/RRmorphdata.rda"))
+load(paste0(getwd(),"/RRmorphdata.rda"))
 
 ```
 
@@ -183,7 +186,7 @@ title3d(names(rm2sur)[2])
 ```
 
 ## 5. `conv.map` {#conv}
-Morphological convergence can be investigated using the function `conv.map`. A theoretical yet crucial prerequisite is that the user must have prior knowledge of which species or clades exhibit convergence; otherwise, the results of `conv.map` may be misleading. We strongly recommend running the function `search.conv` from the `RRphylo` package to identify convergent taxa before proceeding. The functioning and the interpretation of results of `search.conv` are descripted in Castiglione et al. 2019 and in the function [`vignette`](https://CRAN.R-project.org/package=RRphylo/vignettes/search.conv.html).
+Morphological convergence can be investigated using the function `conv.map`. A theoretical yet crucial prerequisite is that the user must have prior knowledge of which species or clades exhibit convergence; otherwise, the results of `conv.map` may be misleading. We strongly recommend running the function `search.conv` from the `RRphylo` package to identify convergent taxa before proceeding. The functioning and the interpretation of results of `search.conv` are described in Castiglione et al. 2019 and in the function [`vignette`](https://CRAN.R-project.org/package=RRphylo/vignettes/search.conv.html).
 
 ```{r search.conv, eval=FALSE}
 SC<-search.conv(RR = RRcran, y = PCscore_cran) 
@@ -251,15 +254,22 @@ The first operation of the interpolation process is to compute the barycenter of
 
 
 ## References
-* Castiglione, S., Tesone, G., Piccolo, M., Melchionna, M., Mondanaro, A., Serio, C., Di Febbraro, M. & Raia, P. (2018). A new method for testing evolutionary rate variation and shifts in phenotypic evolution. Methods in Ecology and Evolution, 9(4), 974-983.
-doi.org/10.1111/2041-210X.12954.
-* Melchionna, M., Profico, A., Castiglione, S., Serio, C., Mondanaro, A., Modafferi, M., Tamagnini, D., Maiorano, L. & Sansalone, G. (2021). A method for mapping morphological convergence on three‐dimensional digital models: the case of the mammalian sabre‐tooth (Vol. 64, No. 4, pp. 573-584). doi.org/10.1111/pala.12542
-* Castiglione, S., Melchionna, M., Profico, A., Sansalone, G., Modafferi, M., Mondanaro, A., Wroe, S., Piras, P. & Raia, P. (2022). Human face‐off: a new method for mapping evolutionary rates on three‐dimensional digital models (Vol. 65, No. 1, p. e12582).
-doi.org/10.1111/pala.12582
-* Melchionna, M., Castiglione, S., Girardi, G., Serio, C., Esposito, A., Mondanaro, A., Profico, A., Sansalone, G. & Raia, P. (2024). RRmorph—a new R package to map phenotypic evolutionary rates and patterns on 3D meshes. Communications Biology, 7(1), 1009.
-doi.org/10.1038/s42003-024-06710-8.
+* Castiglione, S., Tesone, G., Piccolo, M., Melchionna, M., Mondanaro, A., Serio, C., Di Febbraro, M. & Raia, P. (2018). A new method for testing evolutionary rate variation and shifts in phenotypic evolution. Methods in Ecology and Evolution, 9(4), 974-983. doi.org/10.1111/2041-210X.12954.
+
+* Melchionna, M., Profico, A., Castiglione, S., Serio, C., Mondanaro, A., Modafferi, M., Tamagnini, D., Maiorano, L. , Raia, P., Witmer, L.M., Wroe, S., & Sansalone, G. (2021). A method for mapping morphological convergence on three-dimensional digital models: the case of the mammalian sabre-tooth. Palaeontology, 64, 573–584. doi:10.1111/pala.12542
+
+* Castiglione, S., Melchionna, M., Profico, A., Sansalone, G., Modafferi, M., Mondanaro, A., Wroe, S., Piras, P., & Raia, P. (2021). Human face-off: a new method for mapping evolutionary rates on three-dimensional digital models. Palaeontology, 65, e12582. doi:10.1111/pala.12582
+  
+* Melchionna, M., Castiglione, S., Girardi, G., Serio, C., Esposito, A., Mondanaro, A., Profico, A., Sansalone, G. & Raia, P. (2024). RRmorph—a new R package to map phenotypic evolutionary rates and patterns on 3D meshes. Communications Biology, 7(1), 1009. doi.org/10.1038/s42003-024-06710-8.
+
 * Schlager, S. (2017). Morpho and Rvcg–shape analysis in R: R-packages for geometric morphometrics, shape analysis and surface manipulations. In Statistical shape and deformation analysis (pp. 217-256). Academic Press. doi.org/10.1016/B978-0-12-810493-4.00011-0
-* Kratsch, C., & McHardy, A. C. (2014). RidgeRace: ridge regression for continuous ancestral character estimation on phylogenetic trees. Bioinformatics, 30(17), i527-i533.
-doi.org/10.1093/bioinformatics/btu477.
+
+* Kratsch, C., & McHardy, A. C. (2014). RidgeRace: ridge regression for continuous ancestral character estimation on phylogenetic trees. Bioinformatics, 30(17), i527-i533. doi.org/10.1093/bioinformatics/btu477.
+
 * Castiglione, S., Serio, C., Mondanaro, A., Melchionna, M., Carotenuto, F., Di Febbraro, M., Profico, A., Tamagnini, D. & Raia, P. (2020). Ancestral state estimation with phylogenetic ridge regression. Evolutionary Biology, 47(3), 220-232. doi.org/10.1007/s11692-020-09505-x
 
+* Christopoulos, D.T. (2022). inflection: Finds the Inflection Point of a Curve. R package version 1.3.6. 
+
+* Bernardini, F., Mittleman, J., Rushmeier, H., Silva, C., & Taubin, G. (1999). The ball-pivoting algorithm for surface reconstruction. IEEE transactions on visualization and computer graphics, 5(4), 349-359.
+
+* Castiglione, S., Serio, C., Tamagnini, D., Melchionna, M., Mondanaro, A., Di Febbraro, M., Profico, A., Piras, P.,Barattolo, F., & Raia, P. (2019). A new, fast method to search for morphological convergence with shape data. PLoS ONE, 14, e0226949. doi:10.1371/journal.pone.0226949
