@@ -2,7 +2,7 @@ Package: RRmorph
 Type: Package
 Title: 3D Morphological Analyses with RRphylo
 Date: 2025-04-01
-Version: 0.0.0
+Version: 0.0.1
 Authors@R: c(person(given = "Marina",
                       family = "Melchionna",
                       role = "aut"),
