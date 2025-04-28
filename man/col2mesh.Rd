@@ -33,7 +33,6 @@ The function colors a \code{mesh} according to a vector of
   download.file(url=da,destfile = paste0(tempdir(),"/RRmorphdata.rda"))
   load(paste0(tempdir(),"/RRmorphdata.rda"))
 
-  options(rgl.useNULL=TRUE)
   require(rgl)
   require(Morpho)
   require(Rvcg)

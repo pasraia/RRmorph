@@ -44,7 +44,6 @@ The function relates PCA loadings of a single PC axis to
   download.file(url=da,destfile = paste0(tempdir(),"/RRmorphdata.rda"))
   load(paste0(tempdir(),"/RRmorphdata.rda"))
 
-  options(rgl.useNULL=TRUE)
   require(rgl)
   require(Morpho)
 

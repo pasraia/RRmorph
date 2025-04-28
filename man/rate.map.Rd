@@ -77,10 +77,10 @@ After selecting the RW (PC) axes, \code{rate.map} automatically
   The reconstruction of species 3d surfaces is based on \code{mshape_sur},
   either provided by the user or generated within the function. Finally, for
   each species in \code{x}, the function computes the area differences
-  between corresponding triangles of its reconstructed 3d mesh and the
+  between corresponding triangles of its reconstructed 3D mesh and the
   surface of the ancestor (most recent common ancestor in the case of two
-  species in \code{x}). In the calculation of differences we supply the
-  possibility to find and remove outliers (\code{out.rem=TRUE}, we suggest
+  species in \code{x}). In the calculation of differences, the possibility to
+  find and remove outliers is supplied (\code{out.rem=TRUE}, we suggest
   considering this possibility if the mesh may contain degenerate facets).
 
   Finally, \code{rate.map} returns a 3D plot showing such comparisons
@@ -96,7 +96,6 @@ After selecting the RW (PC) axes, \code{rate.map} automatically
   download.file(url=da,destfile = paste0(tempdir(),"/RRmorphdata.rda"))
   load(paste0(tempdir(),"/RRmorphdata.rda"))
 
-  options(rgl.useNULL=TRUE)
   require(Morpho)
   require(Rvcg)
 

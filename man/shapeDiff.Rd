@@ -47,7 +47,6 @@ The function reconstructs two specimens' meshes (\code{x})
   download.file(url=da,destfile = paste0(tempdir(),"/RRmorphdata.rda"))
   load(paste0(tempdir(),"/RRmorphdata.rda"))
 
-  options(rgl.useNULL=TRUE)
   require(Morpho)
 
   pca<-procSym(endo.set)
@@ -56,7 +55,7 @@ The function reconstructs two specimens' meshes (\code{x})
   ldm_macaca<-endo.set[,,"Macaca_fuscata"]
   sur_macaca<-endo.sur[["Macaca_fuscata"]]
 
-  diffs<-shapeDiff(x=c("Homo_sapiens","Macaca_fuscata"),
+  diffs<-RRmorph::shapeDiff(x=c("Homo_sapiens","Macaca_fuscata"),
                    pca = pca,refsur = list(sur_homo,sur_macaca),
                    refmat = list(ldm_homo,ldm_macaca))
   }

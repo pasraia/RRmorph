@@ -6,11 +6,11 @@
 #'   refmat = NULL,refsur = NULL, k = 4, exclude = NULL, out.rem = TRUE, plot =
 #'   TRUE, col = "blue", NAcol = "gray", names = TRUE, nsim = 1000)
 #' @param x1,x2 vectors of convergent species. When convergence within a single
-#'   clade was found, \code{x1} is the vector of species belonging to the clade
+#'   clade was found, \code{x1} represents the vector of species belonging to the clade
 #'   (\code{x2=NULL}). When convergence between groups/clades was found,
 #'   \code{x1} and \code{x2} are the two convergent groups/clades.
 #' @param scores data frame (or matrix) with the RW (or PC) scores returned by
-#'   RWA/PCA. Species not included in \code{x1/x2} are ignored.
+#'   RWA/PCA. Species not included in \code{x1} or \code{x2} are ignored.
 #' @param pcs RW (or PC) vectors (eigenvectors of the covariance matrix)
 #'   returned by RWA/PCA.
 #' @param mshape the consensus configuration.
@@ -44,7 +44,7 @@
 #'   the user or generated within the function. Finally, the area differences
 #'   between corresponding triangles of reconstructed 3d meshes for each
 #'   possible pair of convergent species are calculated. In the calculation of
-#'   differences we supply the possibility to find and remove outliers
+#'   differences, the possibility to find and remove outliers is supplied
 #'   (\code{out.rem=TRUE}, we suggest considering this possibility if the mesh
 #'   may contain degenerate facets).
 #'
