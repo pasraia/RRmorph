@@ -1,7 +1,7 @@
 Package: RRmorph
 Type: Package
 Title: 3D Morphological Analyses with RRphylo
-Date: 2025-04-01
+Date: 2025-05-07
 Version: 0.0.1
 Authors@R: c(person(given = "Marina",
                       family = "Melchionna",
@@ -23,7 +23,7 @@ Authors@R: c(person(given = "Marina",
                       family = "Raia",
                       role = "aut"))
 Maintainer: Silvia Castiglione <silvia.castiglione@unina.it>
-Description: Combined with RRphylo, this package provides a powerful tool to analyse and visualise 3d models (surfaces and meshes) in a phylogenetically explicit context (Melchionna et al., 2024 <doi:10.1038/s42003-024-06710-8>. 
+Description: Combined with RRphylo, this package provides a powerful tool to analyse and visualise 3d models (surfaces and meshes) in a phylogenetically explicit context (Melchionna et al., 2024 <doi:10.1038/s42003-024-06710-8>).
 License: GPL-2
 Encoding: UTF-8
 LazyData: true

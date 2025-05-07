@@ -1,6 +1,6 @@
 ## Test environments
 * Mac OS 15.3.1, R 4.4.1
-* Windows 10 Pro, R 4.4.1
+* Windows 10 Pro, R 4.4.3
 * win-builder (devel and release)
 
 ## R CMD check results
@@ -20,7 +20,7 @@ unable to verify current time
 
 
 
-** Windows 10 Pro, R 4.4.1
+** Windows 10 Pro, R 4.4.3
 0 errors | 0 warnings | 2 notes
 
 * checking CRAN incoming feasibility ... [2s/12s] NOTE
